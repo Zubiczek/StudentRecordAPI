@@ -6,3 +6,5 @@ attendance and week schedule (also they can see which lesson is next and when). 
 week schedule. Admin is responsible for creating new users and add/update schedules and assign new students to class.
 
 Coding this API helped me learn how to build REST API in ASP.NET Core framework. It taught me how to secure asp.net applications and give permissions to methods to users with specific roles. It helped me a lot to understand the proccess of JWT Token based authorization/authentication in a more different way. Thanks to this project i learnt CQRS and mediator patterns and how to write clean SOLID code and how to handle unexpected exceptions and logged them in files.
+
+The project's been created with local repository and it was moved here.
