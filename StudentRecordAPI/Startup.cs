@@ -49,6 +49,7 @@ namespace StudentRecordAPI
                 app.UseSwagger();
                 app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "StudentRecordAPI v1"));
             }
+            app.ConfigureExceptionMiddleware();
 
             app.UseHttpsRedirection();
 
