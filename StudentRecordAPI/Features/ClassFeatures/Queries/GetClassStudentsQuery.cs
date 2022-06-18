@@ -6,8 +6,8 @@ namespace StudentRecordAPI.Features.ClassFeatures.Queries
 {
     public class GetClassStudentsQuery : IRequest<List<StudentsDTO>>
     {
-        public uint Class_id { get; set; }
-        public GetClassStudentsQuery(uint Class_id)
+        public int Class_id { get; set; }
+        public GetClassStudentsQuery(int Class_id)
         {
             this.Class_id = Class_id;
         }

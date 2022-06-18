@@ -4,8 +4,8 @@ namespace StudentRecordAPI.Features.NoteFeatures.Commands
 {
     public class DeleteNoteCommand : IRequest
     {
-        public uint Note_id { get; set; }
-        public DeleteNoteCommand(uint Note_id)
+        public int Note_id { get; set; }
+        public DeleteNoteCommand(int Note_id)
         {
             this.Note_id = Note_id;
         }
