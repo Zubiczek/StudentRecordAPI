@@ -21,7 +21,7 @@ namespace StudentRecordAPI.Database.Entities
         public bool IsTeacher { get; set; } = false;
         [DefaultValue(false)]
         public bool IsAdmin { get; set; } = false;
-        public uint Class_Id { get; set; }
+        public int Class_Id { get; set; }
         public virtual ClassEntity Class { get; set; }
         public virtual List<GradeEntity> Grades { get; set; }
         public virtual List<ScheduleEntity> Schedules { get; set; }

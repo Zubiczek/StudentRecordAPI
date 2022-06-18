@@ -8,7 +8,7 @@ namespace StudentRecordAPI.Database.Entities
 {
     public class SubjectEntity
     {
-        public uint Subject_Id { get; set; }
+        public int Subject_Id { get; set; }
         [Required]
         [MaxLength(20)]
         public string Subject_Name { get; set; }
