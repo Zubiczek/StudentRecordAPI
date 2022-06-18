@@ -3,7 +3,7 @@ using System.Threading.Tasks;
 
 namespace StudentRecordAPI.Services.EmailService
 {
-    public class RegistrationEmailService
+    public class RegistrationEmailService : IEmailService
     {
         private readonly IMailService _mailService;
         public RegistrationEmailService(IMailService mailService)
