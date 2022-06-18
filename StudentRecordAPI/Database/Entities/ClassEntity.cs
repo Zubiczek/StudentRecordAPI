@@ -8,7 +8,7 @@ namespace StudentRecordAPI.Database.Entities
 {
     public class ClassEntity
     {
-        public uint Class_Id { get; set; }
+        public int Class_Id { get; set; }
         [Required]
         [MaxLength(5)]
         public string ClassName { get; set; }

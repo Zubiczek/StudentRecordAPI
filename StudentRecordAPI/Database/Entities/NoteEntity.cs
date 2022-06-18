@@ -9,7 +9,7 @@ namespace StudentRecordAPI.Database.Entities
 {
     public class NoteEntity
     {
-        public uint Note_Id { get; set; }
+        public int Note_Id { get; set; }
         [DefaultValue(false)]
         public bool isitpositive { get; set; }
         public DateTime CreatedOn { get; set; }
