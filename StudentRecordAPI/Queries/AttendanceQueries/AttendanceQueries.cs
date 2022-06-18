@@ -23,7 +23,7 @@ namespace StudentRecordAPI.Queries.AttendanceQueries
             _mapper = mapper;
             _loggedInUserService = loggedInUserService;
         }
-        public async Task<List<AttendanceDTO>> GetAttendanceListFromSubject(uint Schedule_id)
+        public async Task<List<AttendanceDTO>> GetAttendanceListFromSubject(int Schedule_id)
         {
             string userid = _loggedInUserService.GetUserId();
             var attendancelist = await _context.Attendance.Include(x => x.Schedule).ThenInclude(x => x.Subject)
@@ -39,7 +39,7 @@ namespace StudentRecordAPI.Queries.AttendanceQueries
             return attendancelist;
         }
 
-        public async Task<float> GetAVGAttendance(uint Schedule_id)
+        public async Task<float> GetAVGAttendance(int Schedule_id)
         {
             string userid = _loggedInUserService.GetUserId();
             var attendancevalues = await _context.Attendance.Where(x => x.Student_Id == userid && x.Schedule_Id == Schedule_id)

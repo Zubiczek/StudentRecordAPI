@@ -6,6 +6,6 @@ namespace StudentRecordAPI.Queries.ClassQueries
 {
     public interface IClassGetQueries
     {
-        Task<List<StudentsDTO>> GetListOfStudents(uint Class_id);
+        Task<List<StudentsDTO>> GetListOfStudents(int Class_id);
     }
 }
