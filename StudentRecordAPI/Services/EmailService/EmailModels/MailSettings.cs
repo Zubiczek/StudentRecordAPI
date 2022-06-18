@@ -1,7 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace StudentRecordAPI.Services.EmailService.EmailModels
 {
@@ -14,9 +11,9 @@ namespace StudentRecordAPI.Services.EmailService.EmailModels
         public int Port { get; set; }
         public MailSettings()
         {
-            Mail = "wymienksiazke99@gmail.com";
-            DisplayName = "Wymien Ksiazke Serwis";
-            Password = "zespol10UMK!";
+            Mail = "*************";
+            DisplayName = "*************";
+            Password = "*************";
             Host = "smtp.gmail.com";
             Port = 587;
         }
