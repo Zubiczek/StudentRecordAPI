@@ -12,6 +12,9 @@ namespace StudentRecordAPI.Mapper
                     cfg.CreateMap<NewUserDTO, UserEntity>();
                     cfg.CreateMap<GradeAddDTO, GradeEntity>();
                     cfg.CreateMap<AttendanceAddDTO, AttendanceEntity>();
+                    cfg.CreateMap<NewScheduleDTO, ScheduleEntity>();
+                    cfg.CreateMap<NoteAddDTO, NoteEntity>();
+                    cfg.CreateMap<NewScheduleDTO, ScheduleEntity>();
                 }
             ).CreateMapper();
     }
