@@ -8,8 +8,8 @@ namespace StudentRecordAPI.Features.GradeFeatures.Queries
 {
     public class GetGradesAVGQuery : IRequest<float>
     {
-        public uint Subject_id { get; set; }
-        public GetGradesAVGQuery(uint Subject_id)
+        public int Subject_id { get; set; }
+        public GetGradesAVGQuery(int Subject_id)
         {
             this.Subject_id = Subject_id;
         }

@@ -9,8 +9,8 @@ namespace StudentRecordAPI.Features.GradeFeatures.Queries
 {
     public class GetMoreGradeInfoQuery : IRequest<GradeMoreInfoDTO>
     {
-        public uint Grade_id { get; set; }
-        public GetMoreGradeInfoQuery(uint Grade_id)
+        public int Grade_id { get; set; }
+        public GetMoreGradeInfoQuery(int Grade_id)
         {
             this.Grade_id = Grade_id;
         }
