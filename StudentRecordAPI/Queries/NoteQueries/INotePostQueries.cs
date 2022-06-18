@@ -6,6 +6,6 @@ namespace StudentRecordAPI.Queries.NoteQueries
     public interface INotePostQueries
     {
         Task AddNote(NoteAddDTO note);
-        Task DeleteNote(uint Note_id);
+        Task DeleteNote(int Note_id);
     }
 }

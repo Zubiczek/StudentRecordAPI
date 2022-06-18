@@ -53,7 +53,7 @@ namespace StudentRecordAPI.Queries.NoteQueries
             await _context.SaveChangesAsync();
         }
 
-        public async Task DeleteNote(uint Note_id)
+        public async Task DeleteNote(int Note_id)
         {
             var note = await _context.Note.Where(x => x.Note_Id == Note_id).FirstOrDefaultAsync();
             if (note == null) throw new HttpResponseException("Note not found with given id", 404);

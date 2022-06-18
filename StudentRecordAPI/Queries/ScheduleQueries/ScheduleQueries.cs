@@ -1,5 +1,8 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using AutoMapper;
+using Microsoft.EntityFrameworkCore;
 using StudentRecordAPI.Database;
+using StudentRecordAPI.Database.Entities;
+using StudentRecordAPI.Models.AddDTO;
 using StudentRecordAPI.Models.DTO;
 using StudentRecordAPI.Models.Others;
 using StudentRecordAPI.Services.LoggedInUserService;
@@ -10,16 +13,18 @@ using System.Threading.Tasks;
 
 namespace StudentRecordAPI.Queries.ScheduleQueries
 {
-    public class ScheduleQueries : IScheduleGetQueries
+    public class ScheduleQueries : IScheduleGetQueries, ISchedulePostQueries
     {
         private readonly Context _context;
         private readonly ILoggedInUserService _loggedInUserService;
-        public ScheduleQueries(Context context, ILoggedInUserService loggedInUserService)
+        private readonly IMapper _mapper;
+        public ScheduleQueries(Context context, ILoggedInUserService loggedInUserService, IMapper mapper)
         {
             _context = context;
             _loggedInUserService = loggedInUserService;
+            _mapper = mapper;
         }
-        public async Task<List<List<ScheduleSubjectDTO>>> GetWholeStudentSchedule(uint Class_id)
+        public async Task<List<List<ScheduleSubjectDTO>>> GetWholeStudentSchedule(int Class_id)
         {
             var schedulelist = await _context.Schedule.Include(x => x.Subject)
                 .Where(x => x.Class_Id == Class_id).GroupBy(x => x.Date.DayOfWeek).AsNoTracking().AsSplitQuery().ToListAsync();
@@ -43,7 +48,7 @@ namespace StudentRecordAPI.Queries.ScheduleQueries
             }
             return groupedschedule;
         }
-        public async Task<List<ScheduleSubjectDTO>> GetClassScheduleByDate(uint Class_id, DayOfWeek dayOfWeek)
+        public async Task<List<ScheduleSubjectDTO>> GetClassScheduleByDate(int Class_id, DayOfWeek dayOfWeek)
         {
             var schedulelist = await _context.Schedule.Include(x => x.Teacher).Include(x => x.Subject)
                 .Where(x => x.Class_Id == Class_id && x.Date.DayOfWeek == dayOfWeek).OrderBy(x => x.Date.TimeOfDay)
@@ -58,7 +63,7 @@ namespace StudentRecordAPI.Queries.ScheduleQueries
             if (schedulelist == null) throw new HttpResponseException("Schedule not found! Invalid data", 404);
             return schedulelist;
         }
-        public async Task<ScheduleSubjectDTO> GetNextScheduleSubject(uint Class_id)
+        public async Task<ScheduleSubjectDTO> GetNextScheduleSubject(int Class_id)
         {
             DateTime currentdate = DateTime.UtcNow;
             var schedule = await _context.Schedule.Include(x => x.Teacher).Include(x => x.Subject)
@@ -111,6 +116,29 @@ namespace StudentRecordAPI.Queries.ScheduleQueries
                 }).AsNoTracking().AsSplitQuery().ToListAsync();
             if (schedule == null) throw new HttpResponseException("Schedule not found!", 404);
             return schedule;
+        }
+        public async Task UpdateWholeSchedule(List<NewScheduleDTO> newschedule)
+        {
+            if (newschedule == null || newschedule.Count == 0) throw new HttpResponseException("Trying update empty schedule", 400);
+            using (var transaction = _context.Database.BeginTransaction())
+            {
+                try
+                {
+                    _context.Schedule.RemoveRange(_context.Schedule.Where(x => x.Class_Id == newschedule[0].Class_Id));
+                    foreach(var signleschedule in newschedule)
+                    {
+                        var schedule = _mapper.Map<ScheduleEntity>(signleschedule);
+                        _context.Add(schedule);
+                    }
+                    await _context.SaveChangesAsync();
+                    transaction.Commit();
+                }
+                catch
+                {
+                    transaction.Rollback();
+                    throw;
+                }
+            }
         }
     }
 }

@@ -6,7 +6,7 @@ namespace StudentRecordAPI.Queries.AttendanceQueries
 {
     public interface IAttendanceGetQueries
     {
-        Task<List<AttendanceDTO>> GetAttendanceListFromSubject(uint Schedule_id);
-        Task<float> GetAVGAttendance(uint Schedule_id);
+        Task<List<AttendanceDTO>> GetAttendanceListFromSubject(int Schedule_id);
+        Task<float> GetAVGAttendance(int Schedule_id);
     }
 }

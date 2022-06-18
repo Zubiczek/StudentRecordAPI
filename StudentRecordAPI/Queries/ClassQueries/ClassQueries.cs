@@ -15,7 +15,7 @@ namespace StudentRecordAPI.Queries.ClassQueries
         {
             _context = context;
         }
-        public async Task<List<StudentsDTO>> GetListOfStudents(uint Class_id)
+        public async Task<List<StudentsDTO>> GetListOfStudents(int Class_id)
         {
             var students = await _context.User.Where(x => x.Class_Id == Class_id).Select(x => new StudentsDTO
             {
@@ -26,7 +26,7 @@ namespace StudentRecordAPI.Queries.ClassQueries
             if (students == null) throw new HttpResponseException("Students not found! Invalid Class id", 404);
             return students;
         }
-        public async Task AddNewStudentToClass(string Student_id, uint Class_id)
+        public async Task AddNewStudentToClass(string Student_id, int Class_id)
         {
             var student = await _context.User.Where(x => x.Id == Student_id).FirstOrDefaultAsync();
             if (student == null) throw new HttpResponseException("Student not found! Invalid id", 404);
